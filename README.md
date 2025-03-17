@@ -89,6 +89,10 @@ Sau khi train thành công sẽ có 2 file: "Best.pt và Last.pt" nên dùng fil
 ```
 python Detect.py
 ```
+#### **2.8. Sau khi test xong bạn có thể dùng file Dectect.py để nhận diện hành vi sinh viên trong lớp học bằng camera** 
+```
+python Detect.py
+```
 ## **Ghi chú: bạn nên cài Cuda về để chạy PyTorch**  
 ---
 
