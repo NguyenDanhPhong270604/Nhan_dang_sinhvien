@@ -70,53 +70,25 @@ Ví dụ: Tên username bắt buộc phải là admin
 rtsp://admin:danhphong2004@192.168.0.53:554/onvif1
 ```
 #### **2.6. Tiến hành train mô hình** 
-**Bước 1: Chuyền dataset đã thu thập được vào Folder (images)**
+**Bước 1: Sử dụng data mà bạn đã thu nhập được từ video lớp học**
 
-![image](https://github.com/user-attachments/assets/3b2c0942-6012-479d-be58-23cf56b69820)
+![image](https://github.com/user-attachments/assets/e77c5d69-de7b-4648-9876-e4c4d00c28a6)
 
-Các link dataset:
-- [CrowdHuman Crowd Detection CSV Labels](https://www.kaggle.com/datasets/permanalwep/crowd-human-csv-labels)
-- [CrowdHuman Crowd Detection](https://www.kaggle.com/datasets/permanalwep/crowdhuman-crowd-detection)
-- [CrowdHuman Face](https://www.kaggle.com/datasets/permanalwep/crowdhuman-face)
-
-**Bước 2: Tiến hành tự động gán nhãn bằng mô hình yolov8 (auto_labeling.py)**
-
-![image](https://github.com/user-attachments/assets/1f31a6d2-e086-43c7-aec7-f424de74a345)
-
+**Bước 2: Sử dụng python để tách ảnh ra từng frame**
+**Bước 3: Tiến hành gán nhãn thủ công sử dụng LabelImg**
+![test_batch0_labels](https://github.com/user-attachments/assets/c1ac25d0-e30e-4c36-bc97-7c3c7db7dc73)
+Gán nhãn nó sẽ tự động sinh ra file Txt cho từng ảnh
+![image](https://github.com/user-attachments/assets/8191290e-6ed8-481a-bd72-68f1bcc7e5b7)
+**Bước 4: Bắt đầu train mô hình**
 ```
-python auto_labeling.py
+python train.py
 ```
-**Bước 3: Kiểm tra sau khi tự động gán nhãn (labels/)**
-
-![image](https://github.com/user-attachments/assets/22653595-baa2-4564-98da-f4c9cefdcd7b)
-
-Có file .txt là đúng
-
-**Bước 4: Bắt đầu train (models/train_lstm.py)**
+Sau khi train thành công sẽ có 2 file: "Best.pt và Last.pt" nên dùng file best.pt để nhận được chính xác nhất
+![image](https://github.com/user-attachments/assets/525aaf1a-a756-4d44-afd3-70ab4d53c65c)
+#### **2.7. Sau khi huấn luyện xong bạn có thể dùng file yolov7/Dectect.py để nhận dạng thử xem mô hình của mình train có tốt không** 
 ```
-python train_lstm.py
+python Detect.py
 ```
-Kết quả sau khi train tốt nhất sẽ được lưu vào file **`trained_model.h5`**
-![image](https://github.com/user-attachments/assets/c604b999-7b20-478b-907c-a9f710aa6b08)
-
-#### **2.7. Chạy toàn bộ mô hình sau khi train xong (app.py)** 
-```
-python app.py
-```
-## **Các API Endpoint**  
-| Endpoint                 | Phương thức | Mô tả |
-|--------------------------|------------|-------|
-| `/`                      | GET        | Trả về trang giao diện chính của ứng dụng (index.html), hiển thị giao diện web cho người dùng. |
-| `/video_feed`            | GET        | Cung cấp stream video real-time dưới dạng JPEG từ hàm **`generate_frames()`**, cho phép hiển thị video trực tuyến trong trình duyệt. |
-| `/start`               | POST       | Khởi động kết nối camera với RTSP URL được truyền qua request (tham số **`rtsp_url`**).|
-| `/stop`        | POST       | Dừng kết nối camera và giải phóng các tài nguyên liên quan. |
-| `/announce`          | POST       | Kích hoạt thông báo giọng nói (voice notification) để công bố số lượng người hiện tại. |
+## **Ghi chú: bạn nên cài Cuda về để chạy PyTorch**  
 ---
 
-## **Ghi chú:**  
-✅ Hãy kết hợp cả CPU+GPU để camera hoạt động tốt hơn. 
-
----
-**Poster**
-
-![Poster_Nhom9_CNTT_1601 -_1_](https://github.com/user-attachments/assets/41c750e6-52ae-4d4c-b525-262805ef826d)
