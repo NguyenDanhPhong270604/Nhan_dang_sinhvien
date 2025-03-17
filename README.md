@@ -58,7 +58,8 @@ pip install -r requirements.txt
 
 ### **2. Hướng dẫn thực hiện**  
 Sơ đồ cấu trúc:
-![image](https://github.com/user-attachments/assets/1b2eb0de-d875-4dc7-a989-ad5daee27662)
+![image](https://github.com/user-attachments/assets/6316f2b9-8f30-4047-ae53-01c06700e9c5)
+
 
 #### **2.1. Sử dụng phần mềm ODM để lấy địa chỉ và port/onvif1**  
 Định dạng nguồn: 
